@@ -93,7 +93,7 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
 
         if -10 <= formatted <= -0.1:
             # Log message
-            orchestrator_connection.log_info("Omposterer " + str(formatted))
+            orchestrator_connection.log_info(f"Omposterer {formatted}")
             # Click 'Omposter Hovedbog'
             session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP").select()
             # Insert the text 'diff'
