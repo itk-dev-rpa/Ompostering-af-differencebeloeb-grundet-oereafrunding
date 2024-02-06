@@ -102,6 +102,6 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
             session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP/ssubSUB_GL:SAPLFKCRPO:0120/btnBTM_GL_TRANSF").press()
         else:
             # Log message
-            orchestrator_connection.log_info("Omposterer ikke " + str(formatted))
+            orchestrator_connection.log_info(f"Omposterer ikke {formatted}")
             # Click 'Gå tilbage til listen'
             session.findById("wnd[0]/tbar[0]/btn[3]").press()
