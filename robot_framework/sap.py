@@ -1,3 +1,4 @@
+"""This module handles the relevant cases in SAP"""
 
 from OpenOrchestrator.orchestrator_connection.connection import OrchestratorConnection
 
@@ -9,7 +10,7 @@ def open_worklist(session):
     # Press the search button
     session.findById("wnd[0]/tbar[1]/btn[8]").press()
 
-def filter(session):
+def filter_searches(session):
     # Press the 'Selekter' button
     session.findById("wnd[0]/tbar[1]/btn[33]").press()
     # Press Oereafrunding

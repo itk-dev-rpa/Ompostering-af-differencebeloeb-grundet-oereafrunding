@@ -12,5 +12,5 @@ def process(orchestrator_connection: OrchestratorConnection) -> None:
 
     session = multi_session.get_all_sap_sessions()[0]
     sap.open_worklist(session)
-    sap.filter(session)
+    sap.filter_searches(session)
     sap.handle_case_or_skip(session, orchestrator_connection)
