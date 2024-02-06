@@ -2,6 +2,7 @@
 
 from OpenOrchestrator.orchestrator_connection.connection import OrchestratorConnection
 
+
 def open_worklist(session):
     """
     Opens the worklist in the SAP application.
@@ -19,6 +20,7 @@ def open_worklist(session):
     # Press the search button
     session.findById("wnd[0]/tbar[1]/btn[8]").press()
 
+
 def filter_searches(session):
     """
     Filters the search results in the SAP application.
@@ -34,6 +36,7 @@ def filter_searches(session):
     # Press Oereafrunding
     session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").setCurrentCell(9,"TEXT")
     session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").clickCurrentCell()
+
 
 def format_value(session):
     """
@@ -63,12 +66,13 @@ def format_value(session):
     formatted = float(unformatted)
     return formatted
 
+
 def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection):
     """
     Processes each case in the SAP application or skips based on certain conditions.
 
     Iterates through each case in the search result list, formats the value using 'format_value', and
-    decides whether to perform an action based on the formatted value. Logs actions using the 
+    decides whether to perform an action based on the formatted value. Logs actions using the
     orchestrator connection.
 
     Parameters:

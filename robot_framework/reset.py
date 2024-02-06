@@ -6,7 +6,6 @@ from itk_dev_shared_components.sap import sap_login
 from robot_framework import config
 
 
-
 def reset(orchestrator_connection: OrchestratorConnection) -> None:
     """Clean up, close/kill all programs and start them again. """
     orchestrator_connection.log_trace("Resetting.")
