@@ -1,6 +1,7 @@
 """This module handles the relevant cases in SAP"""
 
 from OpenOrchestrator.orchestrator_connection.connection import OrchestratorConnection
+from itk_dev_shared_components.sap import gridview_util
 
 
 def open_worklist(session):
@@ -34,8 +35,10 @@ def filter_searches(session):
     # Press the 'Selekter' button
     session.findById("wnd[0]/tbar[1]/btn[33]").press()
     # Press Oereafrunding
-    session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").setCurrentCell(9, "TEXT")
-    session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").clickCurrentCell()
+    layout_table = session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell")
+    row_index = gridview_util.find_row_index_by_value(layout_table, "VARIANT", "/ØREAFRUND")
+    layout_table.setCurrentCell(row_index, "TEXT")
+    layout_table.clickCurrentCell()
 
 
 def format_value(session):
