@@ -34,7 +34,7 @@ def filter_searches(session):
     # Press the 'Selekter' button
     session.findById("wnd[0]/tbar[1]/btn[33]").press()
     # Press Oereafrunding
-    session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").setCurrentCell(9,"TEXT")
+    session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").setCurrentCell(9, "TEXT")
     session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").clickCurrentCell()
 
 
@@ -82,7 +82,7 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
     row_count = session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").rowCount
     # Open each case in the search result list
     for row in range(row_count):
-        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(row,"")
+        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(row, "")
         session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectedRows = row
         session.findById("wnd[0]/tbar[1]/btn[46]").press()
 
