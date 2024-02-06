@@ -57,5 +57,3 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
             orchestrator_connection.log_info("Omposterer ikke " + str(formatted))
             # Click 'Gå tilbage til listen'
             session.findById("wnd[0]/tbar[0]/btn[3]").press()
-
-
