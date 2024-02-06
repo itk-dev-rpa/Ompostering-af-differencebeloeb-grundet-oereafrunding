@@ -1,4 +1,5 @@
 
+from OpenOrchestrator.orchestrator_connection.connection import OrchestratorConnection
 
 def open_worklist(session):
     session.findById("wnd[0]/tbar[0]/okcd").text = "FPCRPO"
@@ -35,7 +36,7 @@ def format_value(session):
 
     return formatted
 
-def handle_case_or_skip(session): 
+def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection): 
     row_count = session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").rowCount
     # Open each case in the search result list
     for row in range(row_count):
@@ -46,6 +47,8 @@ def handle_case_or_skip(session):
         formatted = format_value(session)
 
         if -10 <= formatted <= -0.1:
+            # Log message
+            orchestrator_connection.log_info("Omposterer " + str(formatted))
             # Click 'Omposter Hovedbog'
             session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP").select() 
             # Insert the text 'diff'
@@ -53,6 +56,8 @@ def handle_case_or_skip(session):
             # Click 'Omposter'
             session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP/ssubSUB_GL:SAPLFKCRPO:0120/btnBTM_GL_TRANSF").press()
         else: 
+            # Log message
+            orchestrator_connection.log_info("Omposterer ikke " + str(formatted))
             # Click 'Gå tilbage til listen'
             session.findById("wnd[0]/tbar[0]/btn[3]").press()
 
