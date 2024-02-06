@@ -15,8 +15,6 @@ def filter(session):
     # Press Oereafrunding
     session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").setCurrentCell(9,"TEXT")
     session.findById("wnd[1]/usr/ssubD0500_SUBSCREEN:SAPLSLVC_DIALOG:0501/cntlG51_CONTAINER/shellcont/shell").clickCurrentCell()
-    
-
 
 def format_value(session):
     # Find the relevant value, which is in a wrong format
@@ -31,9 +29,7 @@ def format_value(session):
 
     # Replace all commas with a period for decimal notation
     unformatted = unformatted.replace(",", ".")
-    
     formatted = float(unformatted)
-
     return formatted
 
 def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection): 
