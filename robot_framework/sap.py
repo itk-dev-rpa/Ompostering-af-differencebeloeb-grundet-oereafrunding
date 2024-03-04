@@ -83,17 +83,17 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
     orchestrator_connection (OrchestratorConnection): Connection to the orchestrator for logging.
     """
     row_count = session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").rowCount
-    
+
     # Opens each case from the search result list that has the Status 'Fri'
     for row in range(row_count):
         status = session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").getCellValue(row, "STATE_TXT")
-        
-        if status == 'Fri': 
+
+        if status == 'Fri':
             session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(row, "")
             session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectedRows = row
             # Open the case
             session.findById("wnd[0]/tbar[1]/btn[46]").press()
-        
+
             formatted = format_value(session)
 
             if -10 <= formatted <= -0.1:
@@ -110,4 +110,3 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
                 orchestrator_connection.log_info(f"Omposterer ikke {formatted}")
                 # Click 'Gå tilbage til listen'
                 session.findById("wnd[0]/tbar[0]/btn[3]").press()
-
