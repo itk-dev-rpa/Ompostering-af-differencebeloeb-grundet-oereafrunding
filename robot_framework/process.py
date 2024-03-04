@@ -15,6 +15,7 @@ def process(orchestrator_connection: OrchestratorConnection) -> None:
     sap.filter_searches(session)
     sap.handle_case_or_skip(session, orchestrator_connection)
 
+
 if __name__ == "__main__":
     oc = OrchestratorConnection("Ompostering", r"mssql+pyodbc://localhost\SQLEXPRESS01/OpenOrchestrator?driver=ODBC+Driver+17+for+SQL+Server", "DgWSzep2C7khhZnAZTOfz38vqHI3uFBEVZ0BfSmEfF0=", "")
     process(oc)
