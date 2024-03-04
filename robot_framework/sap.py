@@ -83,25 +83,30 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
     orchestrator_connection (OrchestratorConnection): Connection to the orchestrator for logging.
     """
     row_count = session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").rowCount
-    # Open each case in the search result list
+
+    # Opens each case from the search result list that has the Status 'Fri'
     for row in range(row_count):
-        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(row, "")
-        session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectedRows = row
-        session.findById("wnd[0]/tbar[1]/btn[46]").press()
+        status = session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").getCellValue(row, "STATE_TXT")
 
-        formatted = format_value(session)
+        if status == 'Fri':
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").setCurrentCell(row, "")
+            session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectedRows = row
+            # Open the case
+            session.findById("wnd[0]/tbar[1]/btn[46]").press()
 
-        if -10 <= formatted <= -0.1:
-            # Log message
-            orchestrator_connection.log_info(f"Omposterer {formatted}")
-            # Click 'Omposter Hovedbog'
-            session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP").select()
-            # Insert the text 'diff'
-            session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP/ssubSUB_GL:SAPLFKCRPO:0120/ctxtFKKCRPO3-KUKON").text = "diff"
-            # Click 'Omposter'
-            session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP/ssubSUB_GL:SAPLFKCRPO:0120/btnBTM_GL_TRANSF").press()
-        else:
-            # Log message
-            orchestrator_connection.log_info(f"Omposterer ikke {formatted}")
-            # Click 'Gå tilbage til listen'
-            session.findById("wnd[0]/tbar[0]/btn[3]").press()
+            formatted = format_value(session)
+
+            if -10 <= formatted <= -0.1:
+                # Log message
+                orchestrator_connection.log_info(f"Omposterer {formatted}")
+                # Click 'Omposter Hovedbog'
+                session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP").select()
+                # Insert the text 'diff'
+                session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP/ssubSUB_GL:SAPLFKCRPO:0120/ctxtFKKCRPO3-KUKON").text = "diff"
+                # Click 'Omposter'
+                session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP/ssubSUB_GL:SAPLFKCRPO:0120/btnBTM_GL_TRANSF").press()
+            else:
+                # Log message
+                orchestrator_connection.log_info(f"Omposterer ikke {formatted}")
+                # Click 'Gå tilbage til listen'
+                session.findById("wnd[0]/tbar[0]/btn[3]").press()

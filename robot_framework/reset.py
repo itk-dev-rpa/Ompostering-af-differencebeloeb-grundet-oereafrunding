@@ -1,8 +1,7 @@
 """This module handles resetting the state of the computer so the robot can work with a clean slate."""
 
 from OpenOrchestrator.orchestrator_connection.connection import OrchestratorConnection
-from itk_dev_shared_components.sap import sap_login
-
+from itk_dev_shared_components.sap import sap_login, fmcacov, multi_session
 from robot_framework import config
 
 
@@ -34,3 +33,5 @@ def open_all(orchestrator_connection: OrchestratorConnection) -> None:
     orchestrator_connection.log_trace("Opening all applications.")
     creds = orchestrator_connection.get_credential(config.SAP_LOGIN)
     sap_login.login_using_cli(creds.username, creds.password)
+    session = multi_session.get_all_sap_sessions()[0]
+    fmcacov.dismiss_key_popup(session)
