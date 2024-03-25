@@ -94,6 +94,12 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
             # Open the case
             session.findById("wnd[0]/tbar[1]/btn[46]").press()
 
+            # Clicks OK on a pop-up with message: "Position Udlignet". Maybe other pop-ups with same button id will also be dismissed.
+            popup_ok_button = session.findById("wnd[1]/tbar[0]/btn[0]", False)
+            if popup_ok_button:
+                popup_ok_button.press()
+                continue
+
             formatted = format_value(session)
 
             if -10 <= formatted <= -0.1:
