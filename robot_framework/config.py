@@ -13,4 +13,4 @@ SCREENSHOT_SENDER = "robot@friend.dk"
 
 # Constant/Credential names
 ERROR_EMAIL = "Error Email"
-SAP_LOGIN = "Mathias SAP"
+SAP_LOGIN = "SAP Ompostering"
