@@ -102,7 +102,7 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
 
             formatted = format_value(session)
 
-            if -10 <= formatted <= -0.1:
+            if -10 <= formatted <= -0.01:
                 # Log message
                 orchestrator_connection.log_info(f"Omposterer {formatted}")
                 # Click 'Omposter Hovedbog'
@@ -111,6 +111,13 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
                 session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP/ssubSUB_GL:SAPLFKCRPO:0120/ctxtFKKCRPO3-KUKON").text = "diff"
                 # Click 'Omposter'
                 session.findById("wnd[0]/usr/subSUB1:SAPLFKCRPO:0100/subSUB_FKT:SAPLFKCRPO:0108/tabsTAB_TRANSFER_POSTING/tabpGLTP/ssubSUB_GL:SAPLFKCRPO:0120/btnBTM_GL_TRANSF").press()
+                # Check for popup
+                popup = session.findById("wnd[1]/tbar[0]/btn[0]", False)
+                if popup:
+                    if session.findById("wnd[1]/usr/txtMESSTXT1").text.strip() == "Der sker ingen behandling pga. spærre af":
+                        popup.press()
+                    else:
+                        raise RuntimeError("Unknown popup")
             else:
                 # Log message
                 orchestrator_connection.log_info(f"Omposterer ikke {formatted}")
