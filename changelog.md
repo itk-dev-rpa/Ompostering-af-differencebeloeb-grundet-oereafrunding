@@ -25,6 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Lower range of values to be transferred adjusted from 0.1 to 0.01
 
-[Unreleased]: https://github.com/itk-dev-rpa/udtraek-tilmelding-digital-post/compare/1.1.0...HEAD
-[1.1.0]: https://github.com/itk-dev-rpa/udtraek-tilmelding-digital-post/releases/tag/1.1.0
-[1.0.4]: https://github.com/itk-dev-rpa/udtraek-tilmelding-digital-post/releases/tag/1.0.4
+[Unreleased]: https://github.com/itk-dev-rpa/Ompostering-af-differencebeloeb-grundet-oereafrunding/compare/1.1.0...HEAD
+[1.1.0]: https://github.com/itk-dev-rpa/Ompostering-af-differencebeloeb-grundet-oereafrunding/releases/tag/1.1.0
+[1.0.4]: https://github.com/itk-dev-rpa/Ompostering-af-differencebeloeb-grundet-oereafrunding/releases/tag/1.0.4
