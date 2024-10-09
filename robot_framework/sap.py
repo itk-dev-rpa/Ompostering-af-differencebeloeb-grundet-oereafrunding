@@ -1,7 +1,8 @@
 """This module handles the relevant cases in SAP"""
 
-from OpenOrchestrator.orchestrator_connection.connection import OrchestratorConnection
+from OpenOrchestrator.orchestrator_connection.connection import OrchestratorConnection, QueueStatus
 from itk_dev_shared_components.sap import gridview_util
+from robot_framework import config
 
 
 def open_worklist(session):
@@ -103,6 +104,7 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
             formatted = format_value(session)
 
             if -10 <= formatted <= -0.01:
+                queue_element = orchestrator_connection.create_queue_element(config.QUEUE_NAME)
                 # Log message
                 orchestrator_connection.log_info(f"Omposterer {formatted}")
                 # Click 'Omposter Hovedbog'
@@ -117,7 +119,9 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
                     if session.findById("wnd[1]/usr/txtMESSTXT1").text.strip() == "Der sker ingen behandling pga. spærre af":
                         popup.press()
                     else:
+                        orchestrator_connection.set_queue_element_status(queue_element.id, QueueStatus.FAILED)
                         raise RuntimeError("Unknown popup")
+                orchestrator_connection.set_queue_element_status(queue_element.id, QueueStatus.DONE)
             else:
                 # Log message
                 orchestrator_connection.log_info(f"Omposterer ikke {formatted}")
