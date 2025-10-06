@@ -2,6 +2,7 @@
 
 from OpenOrchestrator.orchestrator_connection.connection import OrchestratorConnection, QueueStatus
 from itk_dev_shared_components.sap import gridview_util
+import itk_dev_event_log
 from robot_framework import config
 
 
@@ -122,6 +123,7 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
                         orchestrator_connection.set_queue_element_status(queue_element.id, QueueStatus.FAILED)
                         raise RuntimeError("Unknown popup")
                 orchestrator_connection.set_queue_element_status(queue_element.id, QueueStatus.DONE)
+                itk_dev_event_log.emit(orchestrator_connection.process_name, "Omposteret")
             else:
                 # Log message
                 orchestrator_connection.log_info(f"Omposterer ikke {formatted}")
