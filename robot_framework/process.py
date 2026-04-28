@@ -19,10 +19,3 @@ def process(orchestrator_connection: OrchestratorConnection) -> None:
     sap.open_worklist(session)
     sap.filter_searches(session)
     sap.handle_case_or_skip(session, orchestrator_connection)
-
-
-if __name__ == "__main__":
-    conn_string = os.getenv("OpenOrchestratorConnString")
-    crypto_key = os.getenv("OpenOrchestratorKey")
-    oc = OrchestratorConnection("Ompostering", conn_string, crypto_key, "", "", "")
-    process(oc)
