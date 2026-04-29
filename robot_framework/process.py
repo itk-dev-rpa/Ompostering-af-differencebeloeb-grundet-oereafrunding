@@ -1,7 +1,5 @@
 """This module contains the main process of the robot."""
 
-import os
-
 from OpenOrchestrator.orchestrator_connection.connection import OrchestratorConnection
 from itk_dev_shared_components.sap import multi_session
 import itk_dev_event_log
@@ -19,10 +17,3 @@ def process(orchestrator_connection: OrchestratorConnection) -> None:
     sap.open_worklist(session)
     sap.filter_searches(session)
     sap.handle_case_or_skip(session, orchestrator_connection)
-
-
-if __name__ == "__main__":
-    conn_string = os.getenv("OpenOrchestratorConnString")
-    crypto_key = os.getenv("OpenOrchestratorKey")
-    oc = OrchestratorConnection("Ompostering", conn_string, crypto_key, "", "")
-    process(oc)
