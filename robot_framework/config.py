@@ -14,4 +14,3 @@ SCREENSHOT_SENDER = "robot@friend.dk"
 # Constant/Credential names
 ERROR_EMAIL = "Error Email"
 SAP_LOGIN = "SAP Ompostering"
-QUEUE_NAME = "Ompostering af Differencebeløb Grundet Øreafrunding"
