@@ -1,9 +1,8 @@
 """This module handles the relevant cases in SAP"""
 
-from OpenOrchestrator.orchestrator_connection.connection import OrchestratorConnection, QueueStatus
+from OpenOrchestrator.orchestrator_connection.connection import OrchestratorConnection
 from itk_dev_shared_components.sap import gridview_util
 import itk_dev_event_log
-from robot_framework import config
 
 
 def open_worklist(session):
