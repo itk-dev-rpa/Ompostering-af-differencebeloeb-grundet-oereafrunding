@@ -116,13 +116,14 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
                 popup = session.findById("wnd[1]/tbar[0]/btn[0]", False)
                 if popup:
                     if session.findById("wnd[1]/usr/txtMESSTXT1").text.strip() in ("Der sker ingen behandling pga. spærre af", "Udligning ikke mulig pga. RIM saldo kontrol for"):
+                        # Dismiss popup and go back
                         popup.press()
+                        session.findById("wnd[0]/tbar[0]/btn[3]").press()
+                        orchestrator_connection.log_info(f"Popup - ikke omposteret.")
                     else:
                         raise RuntimeError("Unknown popup")
                 else:
                     itk_dev_event_log.emit(orchestrator_connection.process_name, "Omposteret")
-                # Click 'Gå tilbage til listen'
-                session.findById("wnd[0]/tbar[0]/btn[3]").press()
             else:
                 # Log message
                 orchestrator_connection.log_info(f"Omposterer ikke {formatted}")
