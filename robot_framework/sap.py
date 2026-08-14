@@ -119,7 +119,7 @@ def handle_case_or_skip(session, orchestrator_connection: OrchestratorConnection
                         # Dismiss popup and go back
                         popup.press()
                         session.findById("wnd[0]/tbar[0]/btn[3]").press()
-                        orchestrator_connection.log_info(f"Popup - ikke omposteret.")
+                        orchestrator_connection.log_info("Popup - ikke omposteret.")
                     else:
                         raise RuntimeError("Unknown popup")
                 else:
